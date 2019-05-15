@@ -14,3 +14,6 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::post('/user/passportReg',"User\UserController@passportReg");
+Route::post('/user/passportLogin',"User\UserController@passportLogin");
