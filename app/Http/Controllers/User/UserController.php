@@ -10,11 +10,13 @@ use Illuminate\Support\Facades\Redis;
 
 class UserController extends Controller
 {
-    public function passportReg(){
+    public function reg(){
         // 接收数据
         $post_data = json_decode(file_get_contents("php://input"));
         // var_dump($post_data);die;
+        $account=$post_data->account;
         $email=$post_data->email;
+        $password=$post_data->password;
         $user_Info = AjaxUserModel::where(['email'=>$email])->first();
         if($user_Info){
             $response = [
@@ -44,21 +46,20 @@ class UserController extends Controller
         }
         die(json_encode($response,JSON_UNESCAPED_UNICODE));
     }
-    public function passportLogin(){
+    public function login(){
         $post_data = json_decode(file_get_contents("php://input"));
 
         $email = $post_data->email;
         $password =  $post_data->password;
         $user_Info = AjaxUserModel::where(['email'=>$email])->first();
-        // var_dump($password);
         if($user_Info){
-            if($password==$user_Info['password']){
+            if($password == $user_Info['password']){
                 $key="login_token:uid".$user_Info['id'];
                 $token = getLoginToken($user_Info['id']);
                 // Cache::put($key,$token,604800);
                 // echo Cache::get($key);echo "<hr>";
                 Redis::set($key,$token);
-                Redis::get($key);
+                Redis::expire($key,604800);
                 $response = [
                     'error' => 0,
                     'msg'   =>  'ok',
