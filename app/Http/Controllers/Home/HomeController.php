@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Home;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\AjaxUserModel;
+use Illuminate\Support\Facades\Redis;
 
 class HomeController extends Controller
 {
