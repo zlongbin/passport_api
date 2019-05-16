@@ -21,6 +21,9 @@ class VerifyCsrfToken extends Middleware
     protected $except = [
         //
         "/passport/*",
-        "/home/*"
+        "/home/*",
+        "/goods/*",
+        "/cart/*",
+        "/order/*"
     ];
 }
