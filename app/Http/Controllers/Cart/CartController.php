@@ -17,17 +17,25 @@ class CartController extends Controller
         $goods_id=$post_data->goods_id;
         $uid=$post_data->uid;
         $num=$post_data->num;
-        $goods = GoodsModel::where('id',$goods_id)->first();
-        $data = [
-            'goods_id'  => $goods_id,
-            'goods_name'  => $goods['name'],
-            'goods_price'  => $goods['price'],
-            'num'  => $num,
-            'uid'  => $uid,
-            'add_time'  => time()
-        ];
-        $cart = CartModel::insert($data);
+        $cart = CartModel::where(['uid'=>$uid,'goods_id'=>$goods_id])->first();
         if($cart){
+            $data = [
+                'num' =>$cart['num'] + $num
+            ];
+            $res = CartModel::where(['uid'=>$uid,'goods_id'=>$goods_id])->update($data);
+        }else{
+            $goods = GoodsModel::where('id',$goods_id)->first();
+            $data = [
+                'goods_id'  => $goods_id,
+                'goods_name'  => $goods['name'],
+                'goods_price'  => $goods['price'],
+                'num'  => $num,
+                'uid'  => $uid,
+                'add_time'  => time()
+            ];
+            $res = CartModel::insert($data);
+        }
+        if($res){
             $response = [
                 'error'  => 0,
                 'msg'  => "ok"
