@@ -27,10 +27,15 @@ class GoodsController extends Controller
         $goods = GoodsModel::where('id',$goods_id)->first();
         if($goods){
             $response = [
-                'name'  => $goods['name'],
-                'price'  => $goods['price'],
-                'img'  => $goods['img'],
-                'store'  => $goods['store']
+                'error' => 0,
+                'msg'   => 'ok',
+                'data'  =>[
+                    'id'    => $goods['id'],
+                    'name'  => $goods['name'],
+                    'price'  => $goods['price'],
+                    'img'  => $goods['img'],
+                    'store'  => $goods['store']
+                ]
             ];
         }else{
             $response = [
