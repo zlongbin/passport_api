@@ -53,7 +53,7 @@ class CartController extends Controller
         $post_data = json_decode(file_get_contents("php://input"));
         // var_dump($post_data);die;
         $uid=$post_data->uid;
-        $cart_Info = GoodsModel::where(['uid'=>$uid])->get();
+        $cart_Info = CartModel::where(['uid'=>$uid])->get();
         die(json_encode($cart_Info,JSON_UNESCAPED_UNICODE));
     }
 }
