@@ -12,7 +12,7 @@ class GoodsController extends Controller
      * 商品
      */
     public function goods(){
-        $goods = GoodsModel::get()->toArray();
+        $goods = GoodsModel::get();
         // echo "<pre>";print_r($goods);echo "</pre>";
         die(json_encode($goods,JSON_UNESCAPED_UNICODE));
     }
@@ -35,7 +35,7 @@ class GoodsController extends Controller
                     'price'  => $goods['price'],
                     'img'  => $goods['img'],
                     'store'  => $goods['store']
-                ]
+                ]   
             ];
         }else{
             $response = [
