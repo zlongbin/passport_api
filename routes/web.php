@@ -24,5 +24,6 @@ Route::post('/goods/goods',"Goods\GoodsController@goods");
 Route::post('/goods/goodsDetail',"Goods\GoodsController@goodsDetail");
 // 购物车
 Route::post('/cart/cart',"Cart\CartController@cart");
+Route::post('/cart/cartList',"Cart\CartController@cartList");
 // 订单
 Route::post('/order/order',"Order\OrderController@order");
