@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Order;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Str;
+use App\Model\OrderModel;
 
 class OrderController extends Controller
 {
