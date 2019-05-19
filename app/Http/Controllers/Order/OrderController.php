@@ -41,8 +41,8 @@ class OrderController extends Controller
         $post_data = json_decode(file_get_contents("php://input"));
         // var_dump($post_data);die;
         $uid=$post_data->uid;
-        $goods_id=$post_data->goods_id;
-        echo $goods_id;die;
+        $goods_id=explode($post_data->goods_id,',');
+        // echo $goods_id;die;
         $order_sn = '1809a_' .date('ymd') .'_'. mt_rand(1111,9999) .'_'. strtolower(Str::random(8));
         $data = [
             'order_sn'  => $order_sn,
@@ -53,16 +53,16 @@ class OrderController extends Controller
         $oid = OrderModel::insertGetId($data);
         echo $oid;
 
-        foreach($goods as $k=>$v){
-            $detail = [
-                'oid' => $oid,
-                'goods_id' => $v['goods_id'],
-                'goods_name' => $v['goods_name'],
-                'goods_price' => $v['goods_price'],
-                'uid' => Auth::id()
-            ];
-            OrderDetailModel::insertGetId($detail);
-        }
-        echo "生成订单成功";
+        // foreach($goods as $k=>$v){
+        //     $detail = [
+        //         'oid' => $oid,
+        //         'goods_id' => $v['goods_id'],
+        //         'goods_name' => $v['goods_name'],
+        //         'goods_price' => $v['goods_price'],
+        //         'uid' => Auth::id()
+        //     ];
+        //     OrderDetailModel::insertGetId($detail);
+        // }
+        // echo "生成订单成功";
     }
 }
