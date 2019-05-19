@@ -24,6 +24,7 @@ class VerifyCsrfToken extends Middleware
         "/home/*",
         "/goods/*",
         "/cart/*",
-        "/order/*"
+        "/order/*",
+        "/pay/*"
     ];
 }
