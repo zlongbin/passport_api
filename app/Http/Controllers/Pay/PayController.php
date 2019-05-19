@@ -3,7 +3,7 @@ namespace App\Http\Controllers\Pay;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Model\OrderModel;
-class AlipayController extends Controller
+class PayController extends Controller
 {
     public $app_id;
     public $gate_way;
