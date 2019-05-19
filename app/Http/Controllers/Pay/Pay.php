@@ -13,12 +13,12 @@ class AlipayController extends Controller
     public $aliPubKey;
     public function __construct()
     {
-        $this->app_id = env('ALIPAY_APPID');
+        $this->app_id = 2016092500595971;
         $this->gate_way = 'https://openapi.alipaydev.com/gateway.do';
         $this->notify_url = env('ALIPAY_NOTIFY_URL');
         $this->return_url = env('ALIPAY_RETURN_URL');
-        $this->rsaPrivateKeyFilePath = storage_path('app/keys/alipay/priv.key');    //应用私钥
-        $this->aliPubKey = storage_path('app/keys/alipay/ali_pub.key'); //支付宝公钥
+        $this->rsaPrivateKeyFilePath = storage_path('app/keys/private_key');    //应用私钥
+        $this->aliPubKey = storage_path('app/keys/ali_public_key'); //支付宝公钥
     }
     public function test()
     {
@@ -29,8 +29,13 @@ class AlipayController extends Controller
      * 订单支付
      * @param $oid
      */
-    public function pay($oid)
+    public function pay()
     {
+        // $oid
+        // 接收数据
+        $post_data = json_decode(file_get_contents("php://input"));
+        // var_dump($post_data);die;
+        $oid=$post_data->oid;
         //验证订单状态 是否已支付 是否是有效订单
         $order_info = OrderModel::where(['oid'=>$oid])->first()->toArray();
         echo '<pre>';print_r($order_info);echo '</pre>';echo '<hr>';
