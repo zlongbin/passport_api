@@ -29,5 +29,5 @@ Route::post('/cart/cartList',"Cart\CartController@cartList");
 Route::post('/order/order',"Order\OrderController@order");
 
 Route::post('/pay/pay',"Pay\PayController@pay");
-Route::post('/pay/return',"Pay\PayController@aliReturn");
+Route::get('/pay/return',"Pay\PayController@aliReturn");
 Route::post('/pay/notify',"Pay\PayController@notify");
